@@ -33,8 +33,8 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, world!' });
 });
 
-server.listen(3003, () => {
-  console.log('Server is running on port 3003');
+server.listen(3001, () => {
+  console.log('Server is running on port 3001');
 });
 
 // io.on('connection', (socket) => {
