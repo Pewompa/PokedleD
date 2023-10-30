@@ -20,8 +20,10 @@ body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
+      rgba(var(--background-start-rgb), 0.7),
+      /* Adjust the alpha value (0.7 in this example) for the desired level of translucency */
+        rgba(var(--background-end-rgb), 0.7)
+        /* Adjust the alpha value here as well */
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); /* You can keep the original color as a fallback for older browsers */
 }
