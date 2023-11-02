@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const indexSchema = new mongoose.Schema({
   indexes: {
-    type: [Number],
+    type: String,
     unique: true,
     required: true,
   },

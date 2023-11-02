@@ -57,4 +57,20 @@ const postPokemon = async (id, name) => {
   }
 };
 
-export { checkPokemon, postPokemon, obtainIndexArray, postIndex };
+const obtainPokemonName = async () => {
+  try {
+    const res = await fetch('http://localhost:3001/pokemons/');
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log('error fetching index: ', error);
+  }
+};
+
+export {
+  checkPokemon,
+  postPokemon,
+  obtainIndexArray,
+  postIndex,
+  obtainPokemonName,
+};

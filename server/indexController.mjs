@@ -17,6 +17,38 @@ async function getIndexes(req, res) {
   }
 }
 
+async function getPokemon(req, res) {
+  const pokemon = await indexModel.find();
+  console.log(pokemon[0].indexes);
+  try {
+    res.status(200).json(pokemon[0].indexes);
+  } catch (error) {
+    console.log('Error fetching pokemon: ', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+async function pushPokemon(req, res) {
+  const { name } = req.body;
+
+  try {
+    let document = await indexModel.findOne({});
+
+    if (!document) {
+      // If the document doesn't exist, create a new one
+      document = new indexModel({ indexes: name });
+    } else {
+      // If the document exists, update the name
+      document.indexes = name;
+    }
+
+    await document.save();
+    res.status(200).json(document);
+  } catch (error) {
+    console.log('Error fetching or updating the pokemon: ', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
 async function pushNewIndex(req, res) {
   try {
     const { index } = req.body; // Extract index from the request body
@@ -140,6 +172,8 @@ const generateRandomPokemonIndex = async () => {
 
 export {
   getIndexes,
+  getPokemon,
+  pushPokemon,
   pushNewIndex,
   generateRandomPokemonIndex,
   saveIndex,
