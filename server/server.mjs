@@ -16,57 +16,76 @@ import {
   roundDownToNearestHour,
 } from './indexController.mjs';
 
-await connectDB();
-const app = express();
-app.use(cors());
-const server = createServer(app);
-// const io = new Server(server);
-const io = new Server(server, {
-  cors: {
-    origin: '*', // Replace with your desired origin or set it to a specific URL
-    methods: ['GET', 'POST'], // Allow the methods you need
-  },
-});
+// await connectDB();
+// const app = express();
+// app.use(cors());
+// const server = createServer(app);
+// // const io = new Server(server);
+// const io = new Server(server, {
+//   cors: {
+//     origin: '*', // Replace with your desired origin or set it to a specific URL
+//     methods: ['GET', 'POST'], // Allow the methods you need
+//   },
+// });
 
-app.use(express.json());
-app.use(pokemonRouter);
-app.use(indexRouter);
+// app.use(express.json());
+// app.use(pokemonRouter);
+// app.use(indexRouter);
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello, world!' });
-});
+(async () => {
+  await connectDB();
 
-const pokemonNames = [...shuffledPokemonNames];
+  const app = express();
+  app.use(cors());
 
-const currentPokemon = pokemonNames.shift();
-const postPokemon = async (name) => {
-  try {
-    console.log('posting', name);
-    const response = await fetch('http://localhost:3001/pokemons/post', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: name,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return console.log('error posting pokemon: ', error);
-  }
-};
-postPokemon(currentPokemon);
+  const server = createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin: '*', // Replace with your desired origin or set it to a specific URL
+      methods: ['GET', 'POST'], // Allow the methods you need
+    },
+  });
 
-cron.schedule('0 0 * * *', async () => {
+  app.use(express.json());
+  app.use(pokemonRouter);
+  app.use(indexRouter);
+
+  app.get('/api/hello', (req, res) => {
+    res.json({ message: 'Hello, world!' });
+  });
+
+  const pokemonNames = [...shuffledPokemonNames];
+
   const currentPokemon = pokemonNames.shift();
-  await postPokemon(currentPokemon);
-});
+  const postPokemon = async (name) => {
+    try {
+      console.log('posting', name);
+      const response = await fetch('http://localhost:3001/pokemons/post', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name,
+        }),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      return console.log('error posting pokemon: ', error);
+    }
+  };
+  postPokemon(currentPokemon);
 
-server.listen(3001, () => {
-  console.log('Server is running on port 3001');
-});
+  cron.schedule('0 0 * * *', async () => {
+    const currentPokemon = pokemonNames.shift();
+    await postPokemon(currentPokemon);
+  });
+
+  server.listen(3001, () => {
+    console.log('Server is running on port 3001');
+  });
+})();
 
 // let lastIndexShared = null;
 // const activeSockets = new Set();
