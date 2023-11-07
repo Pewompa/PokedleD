@@ -3,34 +3,12 @@ import { connectDB } from './db.mjs';
 import { pokemonRouter } from './router.mjs';
 import { indexRouter } from './indexRouter.mjs';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
 import { config } from 'dotenv';
 import cron from 'node-cron';
 import { shuffledPokemonNames } from './pokemonList.mjs';
 
 config();
 import cors from 'cors';
-import {
-  generateRandomPokemonIndex,
-  pushPokemon,
-  roundDownToNearestHour,
-} from './indexController.mjs';
-
-// await connectDB();
-// const app = express();
-// app.use(cors());
-// const server = createServer(app);
-// // const io = new Server(server);
-// const io = new Server(server, {
-//   cors: {
-//     origin: '*', // Replace with your desired origin or set it to a specific URL
-//     methods: ['GET', 'POST'], // Allow the methods you need
-//   },
-// });
-
-// app.use(express.json());
-// app.use(pokemonRouter);
-// app.use(indexRouter);
 
 (async () => {
   await connectDB();
@@ -39,12 +17,6 @@ import {
   app.use(cors());
 
   const server = createServer(app);
-  const io = new Server(server, {
-    cors: {
-      origin: '*', // Replace with your desired origin or set it to a specific URL
-      methods: ['GET', 'POST'], // Allow the methods you need
-    },
-  });
 
   app.use(express.json());
   app.use(pokemonRouter);
@@ -55,8 +27,8 @@ import {
   });
 
   const pokemonNames = [...shuffledPokemonNames];
-
   const currentPokemon = pokemonNames.shift();
+
   const postPokemon = async (name) => {
     try {
       console.log('posting', name);
@@ -82,68 +54,8 @@ import {
     await postPokemon(currentPokemon);
   });
 
-  server.listen(3001, () => {
-    console.log('Server is running on port 3001');
+  const port = process.env.PORT || 3001;
+  server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
   });
 })();
-
-// let lastIndexShared = null;
-// const activeSockets = new Set();
-// io.on('connection', (socket) => {
-//   // Function to emit a random index
-//   console.log('connection on');
-//   // socket.emit('randomPokemonIndex', 1);
-
-//   const emitRandomIndex = async () => {
-//     // socket.emit('randomPokemonIndex', 1);
-//     if (activeSockets.has(socket)) {
-//       // If the socket is already active, you can choose to do nothing or handle it as needed
-//       console.log('Socket already connected', socket);
-//     } else {
-//       console.log('new connection on');
-//       activeSockets.add(socket);
-//       try {
-//         let result;
-//         result = await generateRandomPokemonIndex();
-//         let rightNow = roundDownToNearestHour();
-//         if (lastIndexShared == result.index && result.time == rightNow) {
-//           console.log('sending same index to client:', lastIndexShared);
-//           socket.emit('randomPokemonIndex', lastIndexShared);
-//         } else {
-//           lastIndexShared = result.index;
-//           socket.emit('randomPokemonIndex', result.index);
-//         }
-//         // Schedule the next emission at the beginning of the next hour
-//         const now = new Date();
-//         const nextHour = new Date(
-//           now.getFullYear(),
-//           now.getMonth(),
-//           now.getDate(),
-//           now.getHours() + 1,
-//           0,
-//           0,
-//           0
-//         );
-//         const timeUntilNextHour = nextHour - now;
-//         console.log(timeUntilNextHour / 60000);
-//         // setTimeout(function () {
-//         //   emitRandomIndex();
-//         //   console.log('timing out');
-//         //   // runs second
-//         // }, timeUntilNextHour);
-//       } catch (error) {
-//         // Handle any errors if they occur
-//         console.error('Error:', error);
-//       }
-//     }
-//   };
-
-//   // Initial emission
-//   emitRandomIndex();
-
-//   // Handle disconnection
-//   socket.on('disconnect', () => {
-//     console.log('connection Offf');
-//     // Handle disconnection if needed
-//   });
-// });
