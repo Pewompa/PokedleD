@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "concurrently \"next start -p 3002\" \"node your-server-file.js\"",
+    "start": "concurrently \"next start -p 3002\" \"node server.js\"",
     "start-express": "node your-server-file.js",
     "lint": "next lint"
   },
