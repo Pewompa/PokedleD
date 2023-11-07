@@ -22,10 +22,6 @@ import cors from 'cors';
   app.use(pokemonRouter);
   app.use(indexRouter);
 
-  app.get('/api/hello', (req, res) => {
-    res.json({ message: 'Hello, world!' });
-  });
-
   const pokemonNames = [...shuffledPokemonNames];
   const currentPokemon = pokemonNames.shift();
 
