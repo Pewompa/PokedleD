@@ -11,8 +11,8 @@ config();
 import cors from 'cors';
 
 (async () => {
-  const dbConnectionString = process.env.MONGODB_URI;
-  await dbConnectionString();
+  await connectDB();
+
   const app = express();
   app.use(cors());
 
