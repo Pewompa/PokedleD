@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
-    "start": "next start -p 3002",
+    "start": "concurrently \"next start -p 3002\" \"node your-server-file.js\"",
+    "start-express": "node your-server-file.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -22,9 +23,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "engines": {
+    "node": "18.17.1"
   }
 }
