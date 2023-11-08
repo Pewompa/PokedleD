@@ -32,21 +32,23 @@ config();
 
   const username = 'bernatpavon'; // Replace with your actual username
   const password = 'ioEQ9sz8ZJihkLR5'; // Replace with your actual password
-  const API_BASE_URL = 'https://pokkedle-3f2c35080d3a.herokuapp.com';
 
   const postPokemon = async (name) => {
     try {
       console.log('posting', name);
-      const response = await fetch(`${API_BASE_URL}/pokemons/post`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
-        },
-        body: JSON.stringify({
-          name: name,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.API_BASE_URL}/pokemons/post`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+          },
+          body: JSON.stringify({
+            name: name,
+          }),
+        }
+      );
       const data = await response.json();
       return data;
     } catch (error) {
