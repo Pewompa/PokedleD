@@ -25,6 +25,9 @@ config();
   const pokemonNames = [...shuffledPokemonNames];
   const currentPokemon = pokemonNames.shift();
 
+  const username = 'bernatpavon'; // Replace with your actual username
+  const password = 'ioEQ9sz8ZJihkLR5'; // Replace with your actual password
+
   const postPokemon = async (name) => {
     try {
       console.log('posting', name);
@@ -32,6 +35,7 @@ config();
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
+          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
         },
         body: JSON.stringify({
           name: name,
