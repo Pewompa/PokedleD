@@ -28,7 +28,7 @@ config();
   const postPokemon = async (name) => {
     try {
       console.log('posting', name);
-      const response = await fetch('http://localhost:3001/pokemons/post', {
+      const response = await fetch('${process.env.MONGODB_URI}/pokemons/post', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',

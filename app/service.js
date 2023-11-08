@@ -1,6 +1,6 @@
 const checkPokemon = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3001/pokemon/${id}`);
+    const res = await fetch(`${process.env.MONGODB_URI}/pokemon/${id}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -10,7 +10,7 @@ const checkPokemon = async (id) => {
 
 const obtainIndexArray = async () => {
   try {
-    const res = await fetch('http://localhost:3001/indexes');
+    const res = await fetch('${process.env.MONGODB_URI}/indexes');
     const data = await res.json();
     return data[0];
   } catch (error) {
@@ -20,7 +20,7 @@ const obtainIndexArray = async () => {
 
 const postIndex = async (index) => {
   try {
-    const response = await fetch('http://localhost:3001/indexes/post', {
+    const response = await fetch('${process.env.MONGODB_URI}/indexes/post', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -40,7 +40,7 @@ const postIndex = async (index) => {
 const postPokemon = async (id, name) => {
   try {
     console.log('inside post ', id, name);
-    const response = await fetch('http://localhost:3001/pokemon/post', {
+    const response = await fetch('${process.env.MONGODB_URI}/pokemon/post', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -59,7 +59,7 @@ const postPokemon = async (id, name) => {
 
 const obtainPokemonName = async () => {
   try {
-    const res = await fetch('http://localhost:3001/pokemons/');
+    const res = await fetch('${process.env.MONGODB_URI}/pokemons/');
     const data = await res.json();
     return data;
   } catch (error) {
