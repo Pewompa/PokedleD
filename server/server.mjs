@@ -6,9 +6,9 @@ import { createServer } from 'http';
 import { config } from 'dotenv';
 import cron from 'node-cron';
 import { shuffledPokemonNames } from './pokemonList.mjs';
+import cors from 'cors';
 
 config();
-import cors from 'cors';
 
 (async () => {
   await connectDB();
