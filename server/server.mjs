@@ -15,6 +15,11 @@ config();
 
   const app = express();
   app.use(cors());
+  app.use(
+    cors({
+      origin: 'https://pokedle-psi.vercel.app', // Replace with your Vercel app's URL
+    })
+  );
 
   const server = createServer(app);
 
