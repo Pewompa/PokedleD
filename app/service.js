@@ -1,6 +1,9 @@
+const API_BASE_URL = 'https://pokkedle-3f2c35080d3a.herokuapp.com';
+
 const checkPokemon = async (id) => {
   try {
-    const res = await fetch(`${process.env.MONGODB_URI}/pokemon/${id}`);
+    console.log('api url', `${API_BASE_URL}/pokemon/${id}`);
+    const res = await fetch(`${API_BASE_URL}/pokemon/${id}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -10,7 +13,7 @@ const checkPokemon = async (id) => {
 
 const obtainIndexArray = async () => {
   try {
-    const res = await fetch(`${process.env.MONGODB_URI}/indexes`);
+    const res = await fetch(`${API_BASE_URL}/indexes`);
     const data = await res.json();
     return data[0];
   } catch (error) {
@@ -20,7 +23,7 @@ const obtainIndexArray = async () => {
 
 const postIndex = async (index) => {
   try {
-    const response = await fetch(`${process.env.MONGODB_URI}/indexes/post`, {
+    const response = await fetch(`${API_BASE_URL}/indexes/post`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -40,7 +43,7 @@ const postIndex = async (index) => {
 const postPokemon = async (id, name) => {
   try {
     console.log('inside post ', id, name);
-    const response = await fetch(`${process.env.MONGODB_URI}/pokemon/post`, {
+    const response = await fetch(`${API_BASE_URL}/pokemon/post`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -59,7 +62,7 @@ const postPokemon = async (id, name) => {
 
 const obtainPokemonName = async () => {
   try {
-    const res = await fetch(`${process.env.MONGODB_URI}/pokemons/`);
+    const res = await fetch(`${API_BASE_URL}/pokemons/`);
     const data = await res.json();
     return data;
   } catch (error) {
