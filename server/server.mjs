@@ -32,6 +32,7 @@ config();
 
   const username = 'bernatpavon'; // Replace with your actual username
   const password = 'ioEQ9sz8ZJihkLR5'; // Replace with your actual password
+  const API_BASE_URL = 'https://pokkedle-3f2c35080d3a.herokuapp.com';
 
   const postPokemon = async (name) => {
     try {
