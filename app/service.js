@@ -1,7 +1,7 @@
 const checkPokemon = async (id) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/pokemon/${id}`
+      `https://pokedleserver-0110db31efcd.herokuapp.com/pokemon/${id}`
     );
     const data = await res.json();
     return data;
@@ -12,7 +12,9 @@ const checkPokemon = async (id) => {
 
 const obtainIndexArray = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/indexes`);
+    const res = await fetch(
+      `https://pokedleserver-0110db31efcd.herokuapp.com/indexes`
+    );
     const data = await res.json();
     return data[0];
   } catch (error) {
@@ -23,7 +25,7 @@ const obtainIndexArray = async () => {
 const postIndex = async (index) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/indexes/post`,
+      `https://pokedleserver-0110db31efcd.herokuapp.com/indexes/post`,
       {
         method: 'POST',
         headers: {
@@ -44,7 +46,7 @@ const postIndex = async (index) => {
 const postPokemon = async (id, name) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/pokemon/post`,
+      `https://pokedleserver-0110db31efcd.herokuapp.com/pokemon/post`,
       {
         method: 'POST',
         headers: {
@@ -65,7 +67,9 @@ const postPokemon = async (id, name) => {
 
 const obtainPokemonName = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/pokemons`);
+    const res = await fetch(
+      `https://pokedleserver-0110db31efcd.herokuapp.com/pokemons`
+    );
     const data = await res.json();
     return data;
   } catch (error) {
