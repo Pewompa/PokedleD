@@ -51,7 +51,7 @@ export default function Home({}) {
 
   return (
     <Layout>
-      {pokemon ? <Form pokemon={pokemon}></Form> : <h1>Pouki</h1>}
+      {pokemon ? <Form pokemon={pokemon}></Form> : <h1>Suh gretel</h1>}
     </Layout>
   );
 }
