@@ -2097,7 +2097,6 @@ export const saveAttempt = (attempt) => {
   let attempts;
   attempts = localStorage.getItem('saved Attempts');
   if (!attempts) {
-    console.log('creating local');
     localStorage.setItem('saved Attempts', '[]');
     attempts = localStorage.getItem('saved Attempts');
   }

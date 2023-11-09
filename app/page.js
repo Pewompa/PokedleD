@@ -5,12 +5,12 @@ import Form from '@/app/components/Form';
 import { getPokemonInfo } from '@/app/components/PokemonList';
 import { obtainPokemonName } from './service';
 import { loadGetInitialProps } from 'next/dist/shared/lib/utils';
+
 export default function Home({}) {
   const [pokemonName, setPokemonName] = useState(null);
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
-    console.log('api url', `${process.env.API_BASE_URL}`);
     const getPokemonFromDB = async () => {
       let pokemon = await obtainPokemonName();
       return pokemon;
@@ -43,10 +43,7 @@ export default function Home({}) {
 
     if (parsedPokemon && parsedPokemon.name === pokemonName) {
       setPokemon(parsedPokemon);
-      console.log('obtaining from storage');
-      console.log(localStorage);
     } else {
-      console.log('fetching new pokemon');
       fetchPokemonInfo();
       localStorage.clear();
     }

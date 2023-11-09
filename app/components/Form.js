@@ -12,9 +12,7 @@ function Form({ pokemon }) {
   const attemptInputs = new Array(6).fill('');
   const [isDisabled, setIsDisabled] = useState(false);
   useEffect(() => {
-    console.log(localStorage);
     let attempts = getSavedAttempts();
-    console.log(attempts);
     if (attempts) {
       setAttemptList([...attempts]);
       setAttemptNumber(attempts.length + 1);
@@ -22,7 +20,6 @@ function Form({ pokemon }) {
     }
   }, []);
   useEffect(() => {
-    console.log(attemptList);
     if (attemptList.includes(pokemon.name) || attemptList.length === 6) {
       setIsDisabled(true);
     }
@@ -62,16 +59,6 @@ function Form({ pokemon }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const guess = formValue[formValue.length - 1];
-    // Disable input and submit button only when it's the 6th attempt and the guess is correct
-    // if (attemptNumber >= 6 && attemptList.length === 6) {
-    //   event.target.elements.guessInput.setAttribute('disabled', true);
-    //   document
-    //     .querySelector(`button[name="submitButton"]`)
-    //     .setAttribute('disabled', true);
-    //   event.target.elements.guessInput.value = '';
-
-    //   return;
-    // }
 
     let nextPokemonBox = obtainPokemonPlace(attemptNumber);
 
@@ -93,8 +80,6 @@ function Form({ pokemon }) {
     }
 
     event.target.elements.guessInput.value = '';
-    console.log('attempt list', attemptList);
-    console.log('attempt number', attemptNumber);
   };
 
   return (
