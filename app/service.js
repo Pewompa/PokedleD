@@ -60,7 +60,7 @@ const postPokemon = async (id, name) => {
 
 const obtainPokemonName = async () => {
   try {
-    const res = await fetch(`http://localhost:3001/pokemons`);
+    const res = await fetch(`/pokemons`);
     const data = await res.json();
     return data;
   } catch (error) {
