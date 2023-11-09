@@ -1,7 +1,7 @@
 const checkPokemon = async (id) => {
   try {
-    console.log('api url', `/pokemon/${id}`);
-    const res = await fetch(`/pokemon/${id}`);
+    console.log('api url', `${process.env.API_BASE_URL}/pokemon/${id}`);
+    const res = await fetch(`${process.env.API_BASE_URL}/pokemon/${id}`);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -11,7 +11,7 @@ const checkPokemon = async (id) => {
 
 const obtainIndexArray = async () => {
   try {
-    const res = await fetch(`/indexes`);
+    const res = await fetch(`${process.env.API_BASE_URL}/indexes`);
     const data = await res.json();
     return data[0];
   } catch (error) {
@@ -21,7 +21,7 @@ const obtainIndexArray = async () => {
 
 const postIndex = async (index) => {
   try {
-    const response = await fetch(`/indexes/post`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/indexes/post`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -41,7 +41,7 @@ const postIndex = async (index) => {
 const postPokemon = async (id, name) => {
   try {
     console.log('inside post ', id, name);
-    const response = await fetch(`/pokemon/post`, {
+    const response = await fetch(`${process.env.API_BASE_URL}/pokemon/post`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -60,7 +60,7 @@ const postPokemon = async (id, name) => {
 
 const obtainPokemonName = async () => {
   try {
-    const res = await fetch(`/pokemons`);
+    const res = await fetch(`${process.env.API_BASE_URL}/pokemons`);
     const data = await res.json();
     return data;
   } catch (error) {
