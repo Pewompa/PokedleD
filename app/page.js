@@ -10,6 +10,7 @@ export default function Home({}) {
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
+    console.log('api url', `${process.env.API_BASE_URL}`);
     const getPokemonFromDB = async () => {
       let pokemon = await obtainPokemonName();
       return pokemon;
