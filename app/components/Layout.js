@@ -1,9 +1,17 @@
+import Image from 'next/image';
+
 const Layout = ({ children }) => {
   return (
     <div className="flex flex-col items-center">
       <header>
         <title>PokéDLE</title>
-        <h2 className="text-6xl pt-8">PokéDLE</h2>
+        <Image
+          alt="pokeLogo"
+          width={350}
+          height={350}
+          priority={true}
+          src={'/pokeLogo.png'}
+        />
       </header>
       <main className="text-center">{children}</main>
     </div>
