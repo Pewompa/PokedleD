@@ -32,7 +32,7 @@ const postIndex = async (index) => {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
-          index: index,
+          indexes: index,
         }),
       }
     );
@@ -43,27 +43,27 @@ const postIndex = async (index) => {
   }
 };
 
-const postPokemon = async (id, name) => {
-  try {
-    const response = await fetch(
-      `https://pokedleserver-0110db31efcd.herokuapp.com/pokemon/post`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name,
-          id: id,
-        }),
-      }
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return console.log('error posting pokemon: ', error);
-  }
-};
+// const postPokemon = async (id, name) => {
+//   try {
+//     const response = await fetch(
+//       `https://pokedleserver-0110db31efcd.herokuapp.com/pokemon/post`,
+//       {
+//         method: 'POST',
+//         headers: {
+//           'Content-type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           name: name,
+//           id: id,
+//         }),
+//       }
+//     );
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     return console.log('error posting pokemon: ', error);
+//   }
+// };
 
 const obtainPokemonName = async () => {
   try {
@@ -77,10 +77,4 @@ const obtainPokemonName = async () => {
   }
 };
 
-export {
-  checkPokemon,
-  postPokemon,
-  obtainIndexArray,
-  postIndex,
-  obtainPokemonName,
-};
+export { checkPokemon, obtainIndexArray, postIndex, obtainPokemonName };
